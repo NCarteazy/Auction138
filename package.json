@@ -1,0 +1,30 @@
+{
+  "name": "auction138",
+  "version": "1.0.0",
+  "description": "course project for cmpe 138",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mysql": "^2.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NCarteazy/Auction138.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "mysql",
+    "angular"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NCarteazy/Auction138/issues"
+  },
+  "homepage": "https://github.com/NCarteazy/Auction138#readme"
+}
