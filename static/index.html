@@ -1,12 +1,15 @@
 <html>
   <head>
+  <script src="js/appStart.js"></script>
     <title>Auction 138</title>
   </head>
-  <body bgcolor=white>
+  <body bgcolor=white ngapp="auctionApp">
 
     <h1>Auction 138</h1>
-
+    <div npcontroller="auctionCtrl">
+      <button ngclick="test()">Test button</button>
+      <input ngmodel="user.name">
     <p>Hopefully this will look better once we turn it in.</p>
-
+    </div>
   </body>
 </html>
