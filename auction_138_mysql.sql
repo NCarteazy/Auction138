@@ -63,7 +63,7 @@ CREATE TABLE bid	(bid_id INTEGER NOT NULL,
                         bid_status char(20) NOT NULL,
                         bid_current_amt INTEGER NULL);
 
-insert into bid values ('1', '$', ' 2016-11-22 10:33:00', '2', '1','500');
+insert into bid values ('1', '$', ' 2016-11-22 10:33:00', ' 2016-11-22 10:33:00', '1','500');
 
 -- ALTER TABLE users ADD CONSTRAINT PK_user PRIMARY KEY (user_id);
 -- ALTER TABLE auction ADD CONSTRAINT PK_auction PRIMARY KEY (auction_id);

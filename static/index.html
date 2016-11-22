@@ -1,15 +1,44 @@
-<html>
+<!doctype html>
+<html ng-app="auctionApp">
   <head>
-  <script src="js/appStart.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="js/appStart.js"></script>
+    <script src="js/controllers/auctionCtrl.js"></script>
+
     <title>Auction 138</title>
   </head>
-  <body bgcolor=white ngapp="auctionApp">
+  <body bgcolor=white ng-controller="auctionCtrl">
 
     <h1>Auction 138</h1>
-    <div npcontroller="auctionCtrl">
-      <button ngclick="test()">Test button</button>
-      <input ngmodel="user.name">
+    <div>
+
+    <form name="userInput">
+      
+      <label>
+      <input type="text" required ng-model="user.fname" ng-pattern="regex.name" name="fname" placeholder="First Name">
+      <span class="error" ng-show="( userInput.fname.$error.pattern || userInput.fname.$error.required) &&userInput.fname.$dirty ">
+      *</span>
+      </label>
+
+      <label>
+      <input type="text" required ng-model="user.lname" ng-pattern="regex.name" name="lname" placeholder="Last Name">
+      <span class="error" ng-show="( userInput.lname.$error.pattern || userInput.lname.$error.required) &&userInput.lname.$dirty ">
+      *</span>
+      </label>
+      
+      <label>
+      <input type="text" required ng-model="user.uname" ng-pattern="regex.name" name="uname" placeholder="User Name">
+      </label>
+      <span class="error" ng-show="( userInput.uname.$error.pattern || userInput.uname.$error.required) &&userInput.uname.$dirty ">
+      *</span>
+
+    </form>
+
+
+
+    <button ng-click="test()">Test button</button>
     <p>Hopefully this will look better once we turn it in.</p>
-    </div>
+    </div> 
+
   </body>
 </html>
