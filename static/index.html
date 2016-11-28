@@ -35,9 +35,13 @@
     </form>
 
 
-
-    <button ng-click="test()">Test button</button>
-    <p>Hopefully this will look better once we turn it in.</p>
+      <p>{{answers}}</p>
+    <button ng-click="testselect()">Test button</button>
+    <div ng-repeat="pers in answers">
+        <p>{{ pers.firstname }}</p>
+        <p>{{ pers.lastname }}</p>
+        <p>{{ pers.st_add }}</p>
+    </div>
     </div> 
 
   </body>

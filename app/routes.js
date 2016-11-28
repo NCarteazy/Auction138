@@ -1,19 +1,36 @@
-module.exports = function(app) {
+module.exports = function(app, db) {
 	// application -------------------------------------------------------------
 	app.get('/', function(req, res) {
 		console.log('hi')
-		res.sendFile('./static/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+		res.sendFile('./static/index.html');
 	});
 
 	app.post('/createuser', function(req, res) {
-		console.log("request received");
-		//do database stuff here
-		req.on('data', function(chunk) {
-			body.push(chunk);
-		}).on('end', function(){
-			body = Buffer.concat(body).toString();
-			console.log(body);
-		});
 
+		console.log("request received");
+		console.log(req.body.fname + req.body.lname + req.body.uname);
+
+		var query = "SELECT firstname, lastname, st_add FROM user WHERE firstname = '" + req.body.fname + "';";
+		console.log("About to run query:" + query);
+
+		db.query(query, function(err, results) {
+			console.log(results);
+		});
 	});
+
+	app.post('/selectuser', function(req, res) {
+
+		console.log("request received");
+		console.log(req.body.fname);
+
+		var query = "SELECT firstname, lastname, st_add FROM user WHERE firstname = '" + req.body.fname + "';";
+		console.log("About to run query:" + query);
+
+		db.query(query, function(err, results) {
+			console.log(results);
+			res.data = results;
+			res.send(results);
+		});
+	});
+
 };

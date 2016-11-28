@@ -24,6 +24,13 @@ db.connect(function(err){
 	console.log('connected as id ' + db.threadId);
 });
 
+db.query('use auction138;', function(err) {
+	if (err) {
+		console.error('error using db auction138: ' + err.stack);
+		return;
+	}	
+	console.log('starter using auction138 ' + db.threadId);
+});
 //queries can now be run by doing
 // connection.query('SELECT X FROM Y....', function(err, results) {
 // can call on results inside here to see results	
@@ -39,7 +46,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 
 
 //where routes are handled 
-require('./app/routes.js')(app);
+require('./app/routes.js')(app, db);
 
 //start going
 app.listen(port);
