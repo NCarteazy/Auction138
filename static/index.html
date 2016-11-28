@@ -1,42 +1,105 @@
 <!doctype html>
-<html ng-app="auctionApp">
+<html lang="en" ng-app="auctionApp">
   <head>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/rsrc/angular.min.js"></script>
+    <script src="js/rsrc/bootstrap.min.js"></script>
+
     <script src="js/appStart.js"></script>
     <script src="js/controllers/auctionCtrl.js"></script>
-
+    <style>.active { color: red; font-weight: bolder; }</style>
     <title>Auction 138</title>
   </head>
   <body bgcolor=white ng-controller="auctionCtrl">
 
     <h1>Auction 138</h1>
+
     <div>
 
     <form name="userInput">
       
       <label>
       <input type="text" required ng-model="user.fname" ng-pattern="regex.name" name="fname" placeholder="First Name">
-      <span class="error" ng-show="( userInput.fname.$error.pattern || userInput.fname.$error.required) &&userInput.fname.$dirty ">
+      <span class="error" ng-show="( userInput.fname.$error.pattern || userInput.fname.$error.required) &&userInput.fname.$dirty">
       *</span>
-      </label>
+      </label><br>
 
       <label>
       <input type="text" required ng-model="user.lname" ng-pattern="regex.name" name="lname" placeholder="Last Name">
-      <span class="error" ng-show="( userInput.lname.$error.pattern || userInput.lname.$error.required) &&userInput.lname.$dirty ">
+      <span class="error" ng-show="( userInput.lname.$error.pattern || userInput.lname.$error.required) &&userInput.lname.$dirty">
       *</span>
-      </label>
+      </label><br>
       
       <label>
       <input type="text" required ng-model="user.uname" ng-pattern="regex.name" name="uname" placeholder="User Name">
-      </label>
-      <span class="error" ng-show="( userInput.uname.$error.pattern || userInput.uname.$error.required) &&userInput.uname.$dirty ">
+      <span class="error" ng-show="( userInput.uname.$error.pattern || userInput.uname.$error.required) &&userInput.uname.$dirty">
       *</span>
+      </label><br>
+
+      <input type="text" required ng-model="user.mobilenum" ng-pattern="regex.phone" name="mobilenum" placeholder="Mobile Phone">
+      <span class="error" ng-show="( userInput.mobilenum.$error.pattern || userInput.mobilenum.$error.required) &&userInput.mobilenum.$dirty">
+      *</span>
+      </label><br>
+
+      <input type="text" required ng-model="user.homenum" ng-pattern="regex.homenum" name="homenum" placeholder="Home Phone">
+      <span class="error" ng-show="( userInput.homenum.$error.pattern || userInput.homenum.$error.required) &&userInput.homenum.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.st_add" ng-pattern="regex.add" name="st_add" placeholder="Street Address">
+      <span class="error" ng-show="( userInput.st_add.$error.pattern || userInput.st_add.$error.required) &&userInput.st_add.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.state" ng-pattern="regex.state" name="state" placeholder="State">
+      <span class="error" ng-show="( userInput.state.$error.pattern || userInput.state.$error.required) &&userInput.state.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.city" ng-pattern="regex.name" name="city" placeholder="City">
+      <span class="error" ng-show="( userInput.city.$error.pattern || userInput.city.$error.required) &&userInput.city.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.zipcode" ng-pattern="regex.zc" name="zipcode" placeholder="Zipcode">
+      <span class="error" ng-show="( userInput.zipcode.$error.pattern || userInput.zipcode.$error.required) &&userInput.zipcode.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.country" ng-pattern="regex.cou" name="country" placeholder="Country">
+      <span class="error" ng-show="( userInput.country.$error.pattern || userInput.country.$error.required) &&userInput.country.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.email" ng-pattern="regex.email" name="email" placeholder="E-mail Address">
+      <span class="error" ng-show="( userInput.email.$error.pattern || userInput.email.$error.required) &&userInput.email.$dirty">
+      *</span>
+      </label><br>
+
+      <label>
+      <input type="text" required ng-model="user.payment" ng-pattern="regex.payment" name="payment" placeholder="Payment Info (16 digits)">
+      <span class="error" ng-show="( userInput.payment.$error.pattern || userInput.payment.$error.required) &&userInput.payment.$dirty">
+      *</span>
+      </label><br>
 
     </form>
 
 
       <p>{{answers}}</p>
-    <button ng-click="testselect()">Test button</button>
+    <button ng-click="testcreate()">Test button</button>
     <div ng-repeat="pers in answers">
         <p>{{ pers.firstname }}</p>
         <p>{{ pers.lastname }}</p>
