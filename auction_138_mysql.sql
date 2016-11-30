@@ -86,8 +86,7 @@ CREATE TABLE bid        (bid_id INTEGER NOT NULL,
                         bid_updated TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
                         bid_status VARCHAR(20) NOT NULL,
                         bid_current_amt INTEGER NULL,
-                        primary key(bid_id),
-                        FOREIGN KEY(bid_id) REFERENCES auction(bid_id) ON UPDATE CASCADE ON DELETE CASCADE); -- on update cascade);
+                        primary key(bid_id));
                         
 CREATE TABLE employed_by  (employer_id INTEGER,
                                                                 employee_id INTEGER, 
