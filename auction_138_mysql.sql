@@ -171,6 +171,8 @@ select A.auction_id, A.status, I.item_name, I.manufacturer, I.description, I.ite
 From auction as A, item as I 
 WHERE A.item_id = I.item_id AND A.status = 'active';
 
+
+
 -- ******************************************Delete Example****************************************************
 -- select * From auction;
 
@@ -187,3 +189,16 @@ WHERE A.item_id = I.item_id AND A.status = 'active';
 -- WHERE bid_id = '2';
 
 -- SELECT * FROM bid;
+
+-- *****************************************AddExample*********************************************************
+
+
+-- SELECT * FROM user;
+
+
+-- insert into user values ('105', 'kate', 'tonch', 'newuser', '587 10th st', 'CA', 'san jose', '95148', 'USA', 'newuser@gmail.com', '4086869893', '4088747967', 'credit', NULL, NULL, '5');
+
+
+-- SELECT * FROM user;
+
+
