@@ -3,8 +3,6 @@ angular.module('auctionApp', [])
 	// inject the Todo service factory into our controller
 	.controller('auctionCtrl', ['$scope','$http', function($scope, $http) {
 
-		$scope.success = {create:0};
-
 		$scope.uid = Math.floor((Math.random() * 800) + 105);
 
 		$scope.bId = Math.floor((Math.random() * 800) + 6);  
@@ -62,7 +60,7 @@ angular.module('auctionApp', [])
 			]
 		};
 
-		$scope.testcreate = function() {
+		$scope.create = function() {
 			console.log("Button was clicked, " + $scope.user.list[4].val);
 			var data = {'fname':$scope.user.list[0].val,
 						'lname':$scope.user.list[1].val,
@@ -85,14 +83,11 @@ angular.module('auctionApp', [])
 				data: data
 				}).then(function successCallback(response) {
 					//successfully got a response
-					console.log(response);
-					$scope.createduser = response;
-					$scope.success.create = 1;
+					console.log("successful response");
 					$scope.status = "idle";
 				}, function errorCallback(response) {
 					//usually happens when an exception is thrown
 					console.error(response);
-					$scope.success.create = 0;
 					$scope.status = "failed";
 				});	
 		};
@@ -127,7 +122,7 @@ angular.module('auctionApp', [])
 				data: {'fname':$scope.user.fname}
 				}).then(function successCallback(response) {
 					//successfully got a response
-					console.log("res:" + response);
+					console.log("response data:" + response.data);
 					$scope.answers = response.data;
 					$scope.status = "idle";
 				}, function errorCallback(response) {
@@ -145,7 +140,7 @@ angular.module('auctionApp', [])
 				url: '/auctions',
 				}).then(function successCallback(response) {
 					//successfully got a response
-					console.log("res:" + response);
+					console.log("response data:" + response.data);
 					$scope.auctions = response.data;
 					$scope.status = "idle";
 				}, function errorCallback(response) {
@@ -172,8 +167,8 @@ angular.module('auctionApp', [])
 						data:auc,
 						}).then(function successCallback(response) {
 							//successfully got a response
-							console.log("res:" + response);
-							$scope.auc = response.data;
+							console.log("successful response");
+							auc.current_price = auc.curbid;
 							$scope.status = "idle";
 						}, function errorCallback(response) {
 							//usually happens when an exception is thrown

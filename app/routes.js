@@ -115,8 +115,9 @@ module.exports = function(app, db) {
 		//first query is creating a new row in bid
 		console.log("begin first query");
 		var map = [rq.bId,rq.curbid];
+
 		var query = "insert into bid values (?, '$', NULL, NULL, 'Active', ?);";
-		console.log("About to run query:" + query);
+		console.log("About to run query:" + query + map);
 
 		db.query(query, map, function(err, results) {
 			if(err) {
@@ -130,9 +131,9 @@ module.exports = function(app, db) {
 		});
 		console.log("begin second query");
 		//second query is creating a new placed_on row
-		var map = [rq.auction_id, rq.bId];
+		var map = [rq.bId, rq.auction_id];
 		var query = "insert into placed_on values (?,?);";
-		console.log("About to run query:" + query);
+		console.log("About to run query:" + query + map);
 
 		db.query(query, map, function(err, results) {
 			if(err) {
@@ -147,9 +148,9 @@ module.exports = function(app, db) {
 		
 		console.log("begin third query");
 		//third query is updating 
-		var map = [rq.bId,rq.auction_id];
-		var query = "update auction set bid_id = ? where auction_id = ?;";
-		console.log("About to run query:" + query);
+		var map = [rq.bId, rq.curbid, rq.auction_id];
+		var query = "update auction set bid_id = ?, current_price = ? where auction_id = ?;";
+		console.log("About to run query:" + query + map);
 
 		db.query(query, map, function(err, results) {
 			if(err) {

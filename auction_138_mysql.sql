@@ -100,7 +100,7 @@ CREATE TABLE placed_on          (bidref_id INTEGER,
                                 auctionref_id INTEGER,
                                 primary key(bidref_id, auctionref_id),
                                 FOREIGN KEY(bidref_id) REFERENCES bid(bid_id) ON UPDATE CASCADE ON DELETE CASCADE,
-                                FOREIGN KEY(auctionref_id) REFERENCES aucton(auction_id) ON UPDATE CASCADE ON DELETE CASCADE);
+                                FOREIGN KEY(auctionref_id) REFERENCES auction(auction_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
 
 
