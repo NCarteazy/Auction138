@@ -4,7 +4,8 @@ drop database if exists auction138;
 create database auction138;
 use auction138;
 
-CREATE TABLE user  (user_id INTEGER NOT NULL, 					  	
+
+CREATE TABLE user  (user_id INTEGER NOT NULL,                                           
                         firstname VARCHAR(20) NOT NULL,
                         lastname VARCHAR(20) NOT NULL,
                         username VARCHAR(20) NOT NULL,
@@ -17,19 +18,20 @@ CREATE TABLE user  (user_id INTEGER NOT NULL,
                         mobilenum char(10),
                         homenum char(10),
                         pay_info varchar(100) NOT NULL,
-                        acc_create timestamp NULL,
-                        last_login timestamp NULL,
+                        acc_create TIMESTAMP DEFAULT NOW(),
+                        last_login TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
                         user_rating INTEGER NULL,
                         primary key (user_id));
 
+
 CREATE TABLE auctioneer (user_id INTEGER,
-							auction_id INTEGER,
-						primary key(user_id,auction_id),
+                                                        auction_id INTEGER,
+                                                primary key(user_id,auction_id),
                         FOREIGN KEY(user_id) REFERENCES user(user_id),
                         FOREIGN KEY(auction_id) REFERENCES auction(auction_id));
 
 CREATE TABLE bidder (user_id INTEGER,
-						bid_id INTEGER NOT NULL,
+                                                bid_id INTEGER NOT NULL,
                         primary key(user_id,bid_id),
                         FOREIGN KEY(user_id) REFERENCES user(user_id),
                         FOREIGN KEY(bid_id) REFERENCES bid(bid_id));
@@ -44,16 +46,16 @@ CREATE TABLE auction    (auction_id INTEGER NOT NULL,
                         current_price INTEGER NULL,
                         end_price INTEGER NULL,
                         quantity INTEGER,
-                        start_time TIMESTAMP,
+                        start_time TIMESTAMP DEFAULT NOW(),
                         min_bid_incr INTEGER,
-                        end_time TIMESTAMP,
+                        end_time TIMESTAMP NOT NULL,
                         num_of_bids INTEGER,
                         item_id INTEGER NOT NULL,
                         bid_id INTEGER NOT NULL,
                         -- primary key (auction_id, item_id, bid_id));
                         unique (item_id),
                         unique(bid_id),
-						primary key (auction_id));
+                                                primary key (auction_id));
 
 
 CREATE TABLE item       (item_id INTEGER NOT NULL,
@@ -72,7 +74,7 @@ CREATE TABLE item       (item_id INTEGER NOT NULL,
                         type_id INTEGER NOT NULL,
                         primary key (item_id), -- );
                         unique(type_id),
-						FOREIGN KEY(item_id) REFERENCES auction(item_id));
+                                                FOREIGN KEY(item_id) REFERENCES auction(item_id));
 
 
 CREATE TABLE type       (type_id INTEGER,
@@ -80,39 +82,39 @@ CREATE TABLE type       (type_id INTEGER,
                         primary key(type_id),
                         FOREIGN KEY(type_id) REFERENCES item(type_id));
 
-CREATE TABLE bid	(bid_id INTEGER NOT NULL,
+CREATE TABLE bid        (bid_id INTEGER NOT NULL,
                         bid_currency VARCHAR(20) NOT NULL,
-                        bid_created timestamp NOT NULL,
-                        bid_updated timestamp NOT NULL,
+                        bid_created TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
+                        bid_updated TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
                         bid_status VARCHAR(20) NOT NULL,
                         bid_current_amt INTEGER NULL,
                         primary key(bid_id),
                         FOREIGN KEY(bid_id) REFERENCES auction(bid_id));
                         
-CREATE TABLE employed_by	(employer_id INTEGER,
-								employee_id INTEGER, 
+CREATE TABLE employed_by        (employer_id INTEGER,
+                                                                employee_id INTEGER, 
                                 commission INTEGER,
                                 primary key(employer_id, employee_id),
                                 FOREIGN KEY(employer_id) REFERENCES user(user_id));
 
 
 
-insert into user values ('100', 'john', 'smith', 'user1', '5467 first street', 'CA', 'san jose', '95122', 'USA', 'user1@gmail.com', '4086867393', '4086798765', 'credit', '2016-01-22 10:33:00', '2016-11-22 11:24:00', '5');
-insert into user values ('101', 'michael', 'jordan', 'user2', '8580 main road', 'NY', 'new york', '90055', 'USA', 'user2@gmail.com', '5108756737', '5105984658', 'bill', '2016-01-22 10:33:00', '2016-11-22 11:24:00', '3.5');
-insert into user values ('102', 'sam', 'smith', 'user3', '4857 9th street', 'AZ', 'scottsdale', '98757', 'USA', 'user3@gmail.com', '6708905478', '6708904678', 'credit', '2016-01-22 10:33:00', '2016-11-22 11:24:00', '4.2');
-insert into user values ('103', 'larry', 'fitzgerald', 'user4', '2384 bark street', 'WA', 'seattle', '91890', 'USA', 'user4@gmail.com', '5124568322', '5124545662', 'credit', '2016-01-22 10:33:00', '2016-11-22 11:24:00', '3.9');
-insert into user values ('104', 'carlos', 'hyde', 'user5', '1234 north east way', 'CA', 'san francisco', '95909', 'USA', 'user5@gmail.com', '4086785463', NULL, 'credit', '2016-01-22 10:33:00', '2016-11-22 11:24:00', '2.5');
-																											
-																															-- item_id, bid_id
+insert into user values ('100', 'john', 'smith', 'user1', '5467 first street', 'CA', 'san jose', '95122', 'USA', 'user1@gmail.com', '4086867393', '4086798765', 'credit', NULL, NULL, '5');
+insert into user values ('101', 'michael', 'jordan', 'user2', '8580 main road', 'NY', 'new york', '90055', 'USA', 'user2@gmail.com', '5108756737', '5105984658', 'bill', NULL, NULL, '3.5');
+insert into user values ('102', 'sam', 'smith', 'user3', '4857 9th street', 'AZ', 'scottsdale', '98757', 'USA', 'user3@gmail.com', '6708905478', '6708904678', 'credit', NULL, NULL, '4.2');
+insert into user values ('103', 'larry', 'fitzgerald', 'user4', '2384 bark street', 'WA', 'seattle', '91890', 'USA', 'user4@gmail.com', '5124568322', '5124545662', 'credit', NULL, NULL, '3.9');
+insert into user values ('104', 'carlos', 'hyde', 'user5', '1234 north east way', 'CA', 'san francisco', '95909', 'USA', 'user5@gmail.com', '4086785463', NULL, 'credit', NULL, NULL, '2.5');
+        -- '2016-11-22 11:24:00'                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                        -- item_id, bid_id
 insert into auction values ('200', 'Active', 'live', '0', '50', '200', '5', NULL, '1', '2016-11-27 03:00:00', '1', NULL, '5', '1', '3');
 insert into auction values ('201', 'Active', 'live', '0', '1000', '8000', '500', NULL, '500', '2016-11-27 09:00:00', '1', NULL, '1', '2', '2');
 
-					--   item_id, model, condition,name, rating, sku, count, image, manufacturer, description, retail_price, state, country, type_id)
+                                        --   item_id, model, condition,name, rating, sku, count, image, manufacturer, description, retail_price, state, country, type_id)
 insert into item values ('1', 'm10456', 'new', 'camera', '4.2', 'pas67857', '1', NULL, 'sony', 'High-definition, brand new', '65', 'CA', 'USA', '304');
 insert into item values ('2', 'a158361', 'used', 'dirt bike', '3', 'h586876', '1', NULL, 'honda', 'slightly used, new wheels', '3500', 'CA', 'USA', '303');
 insert into item values ('3', 'x3384', 'used', 'xbox one', '4', NULL, '1', NULL, 'microsoft', '500GB, comes with two controllers', '300', 'CA', 'USA', '309');
 
-					-- typeid, typename
+                                        -- typeid, typename
 insert into type values ('300', 'food');
 insert into type values ('301', 'watches');
 insert into type values ('304', 'cameras');
@@ -120,20 +122,20 @@ insert into type values ('303', 'vehicles');
 insert into type values ('309', 'videogames');
 
 
-					-- bidid, currency, createtime, updatetime, status, current_Amt
+                                        -- bidid, currency, createtime, updatetime, status, current_Amt
 insert into bid values ('1', '$', '2016-11-22 10:33:00', '2016-11-22 11:00:00', 'NotActive', '23');
 insert into bid values ('2', '$', '2016-11-22 10:33:00', '2016-11-22 11:22:00', 'Active', '455');
 insert into bid values ('3', '$', '2016-11-22 10:38:00', '2016-11-22 11:00:00', 'Active', '2');
 insert into bid values ('4', '$', '2016-11-22 12:33:00', '2016-11-22 13:00:00', 'NotActive', '256');
 insert into bid values ('5', '$', '2016-11-22 22:33:00', '2016-11-22 23:00:00', 'NotActive', '1001');
 
-						-- user_id, bid_id
+                                                -- user_id, bid_id
 insert into bidder values ('100', '2');
 
-						-- user_id, auction_id
+                                                -- user_id, auction_id
 insert into auctioneer values ('102', '2');
 
-							-- employer_id, employee_id, commission
+                                                        -- employer_id, employee_id, commission
 insert into employed_by values ('104', '100', '10');
 insert into employed_by values ('103', '102', '15');
 
@@ -151,4 +153,5 @@ SET foreign_key_checks = 1;
 -- select * From bid;
 -- select * From user;
 
-select * From auction as A, item as I WHERE A.item_id = I.item_id AND A.num_of_bids>1;
+
+select acc_create, last_login FROM user WHERE firstname = 'john' OR lastname = 'smith';
