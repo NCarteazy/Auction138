@@ -60,14 +60,14 @@
       </label><br>
 
       <label>
-      <input type="text" required ng-model="user.state" ng-pattern="regex.state" name="state" placeholder="State">
-      <span class="error" ng-show="( userInput.state.$error.pattern || userInput.state.$error.required) &&userInput.state.$dirty">
+      <input type="text" required ng-model="user.state" name="state" placeholder="State">
+      <span class="error" ng-show="userInput.state.$error.required &&userInput.state.$dirty">
       *</span>
       </label><br>
 
       <label>
-      <input type="text" required ng-model="user.city" ng-pattern="regex.name" name="city" placeholder="City">
-      <span class="error" ng-show="( userInput.city.$error.pattern || userInput.city.$error.required) &&userInput.city.$dirty">
+      <input type="text" required ng-model="user.city" name="city" placeholder="City">
+      <span class="error" ng-show="userInput.city.$error.required &&userInput.city.$dirty">
       *</span>
       </label><br>
 
