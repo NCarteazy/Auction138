@@ -22,6 +22,30 @@
     <h1>Auction 138</h1>
 
   <div class="center-block">
+  <div>
+    <h3>Enter a username to search for their active auctions (testuser is a good sample).</h3>
+    <input type="text" ng-model="userauc.uname">
+    <button ng-click="userauction()">Search</button>
+    <table style="width:100%" class="table table-striped" ng-show="userauc.show">
+        <tr>
+          <th>Auction ID</th>
+          <th>Status</th>
+          <th>Current Price</th>
+          <th>Buyout Price</th>
+          <th>End Time</th>
+          <th>Number of Bids</th>
+        </tr>
+        <tr ng-repeat="auc in userauc.results">
+          <td>{{auc.auction_id}}</td>
+          <td>{{auc.status}}</td>
+          <td>${{auc.current_price}}</td>
+          <td>${{auc.buyout_price}}</td>
+          <td>{{auc.end_time}}</td>
+          <td>{{auc.num_of_bids}}</td>
+        </tr>
+      </table>
+  </div>
+<br>
     <div ng-init="loadauction()">
       <table style="width:100%" class="table table-striped">
         <tr>
