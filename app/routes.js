@@ -126,7 +126,7 @@ module.exports = function(app, db) {
 				res.send(results);
 			}
 			else {
-				console.log(results);
+				console.log("success 1");
 			}
 		});
 		console.log("begin second query");
@@ -134,7 +134,7 @@ module.exports = function(app, db) {
 		var map = [rq.bId, rq.auction_id];
 		var query = "insert into placed_on values (?,?);";
 		console.log("About to run query:" + query + map);
-
+		
 		db.query(query, map, function(err, results) {
 			if(err) {
 				console.log("error of placed_on insert "+err);
@@ -142,7 +142,7 @@ module.exports = function(app, db) {
 				res.send(results);
 			}
 			else {
-				console.log(results);
+				console.log("success 2");
 			}
 		});
 		
@@ -159,7 +159,7 @@ module.exports = function(app, db) {
 				res.send(results);
 			}
 			else {
-				console.log(results);
+				console.log("success 3");
 				res.data = results;
 				res.send(results);
 			}
