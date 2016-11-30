@@ -3,18 +3,58 @@ angular.module('auctionApp', [])
 	// inject the Todo service factory into our controller
 	.controller('auctionCtrl', ['$scope','$http', function($scope, $http) {
 
-		$scope.regex = {
-			name : /^\s*\w*\s*$/,
-			add : /^\s*\S+(?:\s+\S+){2}$/,
-			zc : /^[0-9]{5}$/,
-			state : /^[A-Z][a-zA-Z]$/,
-			cou : /^[a-zA-Z]{2,}$/,
-			payment : /^[0-9]{16}$/,
-			email : /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
-		};
 
-		$scope.starter = function() {
-			console.log('hisisisisisi');
+		$scope.user = {
+			list:[
+				{
+					name:'fname',
+					text:"First Name"
+				},
+				{
+					name:'lname',
+					text:"Last Name"
+				},
+				{
+					name:'uname',
+					text:"Username"
+				},
+				{
+					name:'mobilenum',
+					text:"Mobile Number"
+				},
+				{
+					name:'homenum',
+					text:"Home Number"
+				},
+				{
+					name:'st_add',
+					text:"Street Address"
+				},
+				{
+					name:'state',
+					text:"State"
+				},
+				{
+					name:'city',
+					text:"City"
+				},
+				{
+					name:'zipcode',
+					text:"Zipcode"
+				},
+				{
+					name:'country',
+					text:"Country"
+				},
+				{
+					name:'email',
+					text:"Email"
+				},
+				{
+					name:'payment',
+					text:"Payment Information"
+				},
+			]
 		}
 
 		$scope.testcreate = function() {
@@ -67,5 +107,23 @@ angular.module('auctionApp', [])
 					$scope.status = "failed";
 				});	
 		};
+
+		$scope.loadauction = function() {
+			console.log("Loading auctions");
+			$scope.status = "loading";
+			$http({
+				method: 'post',
+				url: '/auctions',
+				}).then(function successCallback(response) {
+					//successfully got a response
+					console.log("res:" + response);
+					$scope.auctions = response.data;
+					$scope.status = "idle";
+				}, function errorCallback(response) {
+					//usually happens when an exception is thrown
+					console.error(response);
+					$scope.status = "failed";
+				});	
+			};
 		
 	}]);

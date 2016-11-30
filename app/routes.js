@@ -47,4 +47,18 @@ module.exports = function(app, db) {
 		});
 	});
 
+	app.post('/auctions', function(req, res) {
+		console.log("userauctions");
+		console.log(req.body);
+
+		var query = "SELECT item_name, current_price, buyout_price, end_time, item_condition  FROM auction as a JOIN item as b ON a.item_id = b.item_id;";
+        console.log("About to run query:" + query);
+
+		db.query(query, function(err, results) {
+			console.log(results);
+			res.data = results;
+			res.send(results);
+		});
+	});
+
 };
