@@ -55,10 +55,8 @@ module.exports = function(app, db) {
 		console.log("userauctions, username passed:" + req.body.uname);
 		console.log(req.body);
 
-		//todo
 
-		//add input box between header and table
-		//this will take a username and return a small table listing their auctions and statuses.
+		//this takes a username and return a small table listing their auctions and statuses.
 
 		var query = "SELECT * FROM auction JOIN auctioneer ON auction.auction_id = auctioneer.auction_id JOIN user ON auctioneer.user_id = user.user_id  WHERE username = '" + req.body.uname + "';";
         console.log("About to run query:" + query);
@@ -114,14 +112,15 @@ module.exports = function(app, db) {
 		//be inserted, as well as a column in bid_on_auction
 		//may have to rerun loadauction query
 
-		//first query is updating the auction with the new bid
-		var map = [rq.auction_id,rq.status,rq.auction_type,rq.start_price,rq.reserve_price,rq.buyout_price,rq.curbid,rq.end_price,rq.quantity,rq.start_time,rq.min_bid_incr,rq.end_time,rq.num_of_bids,rq.item_id,rq.bId];
-		var query = "insert into auction values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		//first query is creating a new row in bid
+		console.log("begin first query");
+		var map = [rq.bId,rq.curbid];
+		var query = "insert into bid values (?, '$', NULL, NULL, 'Active', ?);";
 		console.log("About to run query:" + query);
 
 		db.query(query, map, function(err, results) {
 			if(err) {
-				console.log("error of bid insert"+err);
+				console.log("error of bid insert "+err);
 				res.data = results;
 				res.send(results);
 			}
@@ -130,14 +129,31 @@ module.exports = function(app, db) {
 			}
 		});
 		console.log("begin second query");
-		//second query is creating a new row in bid
-		var map = [rq.bId,rq.curbid];
-		var query = "insert into bid values (?, '$', NULL, NULL, 'Active', ?);";
+		//second query is creating a new placed_on row
+		var map = [rq.auction_id, rq.bId];
+		var query = "insert into placed_on values (?,?);";
 		console.log("About to run query:" + query);
 
 		db.query(query, map, function(err, results) {
 			if(err) {
-				console.log("error of bid insert"+err);
+				console.log("error of placed_on insert "+err);
+				res.data = results;
+				res.send(results);
+			}
+			else {
+				console.log(results);
+			}
+		});
+		
+		console.log("begin third query");
+		//third query is updating 
+		var map = [rq.bId,rq.auction_id];
+		var query = "update auction set bid_id = ? where auction_id = ?;";
+		console.log("About to run query:" + query);
+
+		db.query(query, map, function(err, results) {
+			if(err) {
+				console.log("error of update auction "+err);
 				res.data = results;
 				res.send(results);
 			}
