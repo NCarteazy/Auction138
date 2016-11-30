@@ -97,6 +97,27 @@ angular.module('auctionApp', [])
 				});	
 		};
 
+
+		$scope.userauction = function() {
+			console.log("Button was clicked, " + $scope.userauc.uname);
+			$scope.status = "loading";
+			$scope.userauc.show = true;
+			$http({
+				method: 'post',
+				url: '/userauctions',
+				data: {'uname':$scope.userauc.uname}
+				}).then(function successCallback(response) {
+					//successfully got a response
+					console.log("res:" + response);
+					$scope.userauc.results = response.data;
+					$scope.status = "idle";
+				}, function errorCallback(response) {
+					//usually happens when an exception is thrown
+					console.error(response);
+					$scope.status = "failed";
+				});	
+		};
+
 		$scope.testselect = function() {
 			console.log("Button was clicked, " + $scope.user.fname);
 			$scope.status = "loading";
