@@ -1,4 +1,3 @@
-
 SET foreign_key_checks = 0;
 drop database if exists auction138;
 create database auction138;
@@ -25,19 +24,19 @@ CREATE TABLE user  (user_id INTEGER NOT NULL,
 
 
 CREATE TABLE auctioneer (user_id INTEGER,
-						auction_id INTEGER,
-						primary key(user_id,auction_id),
+                                                auction_id INTEGER,
+                                                primary key(user_id,auction_id),
                         FOREIGN KEY(user_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
                         FOREIGN KEY(auction_id) REFERENCES auction(auction_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
 CREATE TABLE bidder (user_id INTEGER,
-						bid_id INTEGER NOT NULL,
+                                                bid_id INTEGER NOT NULL,
                         primary key(user_id,bid_id),
                         FOREIGN KEY(user_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
                         FOREIGN KEY(bid_id) REFERENCES bid(bid_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
 
-CREATE TABLE auction    (auction_id INTEGER NOT NULL,							
+CREATE TABLE auction    (auction_id INTEGER NOT NULL,                                                   
                         status VARCHAR(20) NOT NULL,
                         auction_type VARCHAR(20) NOT NULL,
                         start_price INTEGER NOT NULL,
@@ -54,7 +53,7 @@ CREATE TABLE auction    (auction_id INTEGER NOT NULL,
                         bid_id INTEGER NOT NULL,
                         unique (item_id),
                         unique(bid_id),
-						primary key (auction_id));
+                                                primary key (auction_id));
 
 
 CREATE TABLE item       (item_id INTEGER NOT NULL,
@@ -73,7 +72,7 @@ CREATE TABLE item       (item_id INTEGER NOT NULL,
                         type_id INTEGER NOT NULL,
                         primary key (item_id), -- );
                         unique(type_id),
-						FOREIGN KEY(item_id) REFERENCES auction(item_id) ON UPDATE CASCADE ON DELETE CASCADE);
+                                                FOREIGN KEY(item_id) REFERENCES auction(item_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
 
 CREATE TABLE type       (type_id INTEGER,
@@ -90,24 +89,17 @@ CREATE TABLE bid        (bid_id INTEGER NOT NULL,
                         primary key(bid_id),
                         FOREIGN KEY(bid_id) REFERENCES auction(bid_id) ON UPDATE CASCADE ON DELETE CASCADE); -- on update cascade);
                         
-CREATE TABLE autioneer_employee  (employer_id INTEGER,
-			        employee_id INTEGER, 
+CREATE TABLE employed_by  (employer_id INTEGER,
+                                                                employee_id INTEGER, 
                                 commission INTEGER,
                                 primary key(employer_id, employee_id),
                                 FOREIGN KEY(employer_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-                                FOREIGN KEY(employee_id) REFERENCES auctioneer(user_id) ON UPDATE CASCADE ON DELETE CASCADE);
+                                FOREIGN KEY(employee_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
-CREATE TABLE bid_employee        (employer_id INTEGER,
-                                employee_id INTEGER, 
-                                commission INTEGER,
-                                primary key(employer_id, employee_id),
-                                FOREIGN KEY(employer_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-                                FOREIGN KEY(employee_id) REFERENCES bid(user_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
 CREATE TABLE placed_on          (bidref_id INTEGER,
                                 auctionref_id INTEGER,
-                                 bid_on_auction INTEGER,                               
-                                primary key(bidref_id, auctionrefid),
+                                primary key(bidref_id, auctionref_id),
                                 FOREIGN KEY(bidref_id) REFERENCES bid(bid_id) ON UPDATE CASCADE ON DELETE CASCADE,
                                 FOREIGN KEY(auctionref_id) REFERENCES aucton(auction_id) ON UPDATE CASCADE ON DELETE CASCADE);
 
@@ -121,15 +113,15 @@ insert into user values ('103', 'larry', 'fitzgerald', 'user4', '2384 bark stree
 insert into user values ('104', 'carlos', 'hyde', 'user5', '1234 north east way', 'CA', 'san francisco', '95909', 'USA', 'user5@gmail.com', '4086785463', NULL, 'credit', NULL, NULL, '2.5');
         -- '2016-11-22 11:24:00'                                                                                                                                                                                                                
   
-						-- auctionid, status, type, startprice, reserveprice, buyoutprice, currentprice,endprice, quantity, start_time, minbidincr, endtime, numofbids, itemid, bidid
-insert into auction values ('200', 'Active', 'live', '0', '50', '200', '5', NULL, '1', '2016-11-27 03:00:00', '1', NULL, '5', '1', '3');
-insert into auction values ('201', 'Active', 'live', '0', '1000', '8000', '500', NULL, '500', '2016-11-27 09:00:00', '1', NULL, '1', '2', '2');
-insert into auction values ('202', 'Active', 'live', '0', '350', '600', '415', NULL, '1', '2016-11-27 12:00:00', '5', NULL, '2', '3', '1');
-insert into auction values ('203', 'Active', 'live', '0', '400', '700', '250', NULL, '1', '2016-11-27 13:00:00', '1', NULL, '1', '4', '4');
-insert into auction values ('204', 'Expired', 'live', '0', '25', '150', '40', '40', '1', '2016-11-27 13:00:00', '1', '2016-11-28 13:00:00', '2', '5', '5');
+                                                -- auctionid, status, type, startprice, reserveprice, buyoutprice, currentprice,endprice, quantity, start_time, minbidincr, endtime, numofbids, itemid, bidid
+insert into auction values ('200', 'Active', 'live', '0', '50', '200', '5', NULL, '1', '2016-11-27 03:00:00', '1', NOW() + INTERVAL 12 HOUR, '5', '1', '3');
+insert into auction values ('201', 'Active', 'live', '0', '1000', '8000', '500', NULL, '500', '2016-11-27 09:00:00', '1', NOW() + INTERVAL 12 HOUR, '1', '2', '2');
+insert into auction values ('202', 'Active', 'live', '0', '350', '600', '415', NULL, '1', '2016-11-27 12:00:00', '5', NOW() + INTERVAL 12 HOUR, '2', '3', '1');
+insert into auction values ('203', 'Active', 'live', '0', '400', '700', '250', NULL, '1', '2016-11-27 13:00:00', '1', NOW() + INTERVAL 12 HOUR, '1', '4', '4');
+insert into auction values ('204', 'Expired', 'live', '0', '25', '150', '40', '40', '1', '2016-11-27 13:00:00', '1', NOW() + INTERVAL 12 HOUR, '2', '5', '5');
 
 
-					--   item_id, model, condition,name, rating, sku, count, image, manufacturer, description, retail_price, state, country, type_id)
+                                        --   item_id, model, condition,name, rating, sku, count, image, manufacturer, description, retail_price, state, country, type_id)
 insert into item values ('1', 'm10456', 'new', 'camera', '4.2', 'pas67857', '1', NULL, 'sony', 'High-definition, brand new', '65', 'CA', 'USA', '304');
 insert into item values ('2', 'a158361', 'used', 'dirt bike', '3', 'h586876', '1', NULL, 'honda', 'slightly used, new wheels', '3500', 'CA', 'USA', '303');
 insert into item values ('3', 'x3384', 'used', 'xbox one', '4', NULL, '1', NULL, 'microsoft', '500GB, comes with two controllers', '300', 'CA', 'USA', '309');
@@ -195,8 +187,3 @@ WHERE A.item_id = I.item_id AND A.status = 'active';
 -- WHERE bid_id = '2';
 
 -- SELECT * FROM bid;
-
-
-
-
-
