@@ -90,11 +90,27 @@ CREATE TABLE bid        (bid_id INTEGER NOT NULL,
                         primary key(bid_id),
                         FOREIGN KEY(bid_id) REFERENCES auction(bid_id) ON UPDATE CASCADE ON DELETE CASCADE); -- on update cascade);
                         
-CREATE TABLE employed_by        (employer_id INTEGER,
-								employee_id INTEGER, 
+CREATE TABLE autioneer_employee  (employer_id INTEGER,
+			        employee_id INTEGER, 
                                 commission INTEGER,
                                 primary key(employer_id, employee_id),
-                                FOREIGN KEY(employer_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE);
+                                FOREIGN KEY(employer_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+                                FOREIGN KEY(employee_id) REFERENCES auctioneer(user_id) ON UPDATE CASCADE ON DELETE CASCADE);
+
+CREATE TABLE bid_employee        (employer_id INTEGER,
+                                employee_id INTEGER, 
+                                commission INTEGER,
+                                primary key(employer_id, employee_id),
+                                FOREIGN KEY(employer_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+                                FOREIGN KEY(employee_id) REFERENCES bid(user_id) ON UPDATE CASCADE ON DELETE CASCADE);
+
+CREATE TABLE placed_on          (bidref_id INTEGER,
+                                auctionref_id INTEGER,
+                                 bid_on_auction INTEGER,                               
+                                primary key(bidref_id, auctionrefid),
+                                FOREIGN KEY(bidref_id) REFERENCES bid(bid_id) ON UPDATE CASCADE ON DELETE CASCADE,
+                                FOREIGN KEY(auctionref_id) REFERENCES aucton(auction_id) ON UPDATE CASCADE ON DELETE CASCADE);
+
 
 
 
