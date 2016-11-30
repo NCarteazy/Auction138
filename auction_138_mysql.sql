@@ -101,18 +101,21 @@ CREATE TABLE employed_by        (employer_id INTEGER,
 
 insert into user values ('100', 'john', 'smith', 'user1', '5467 first street', 'CA', 'san jose', '95122', 'USA', 'user1@gmail.com', '4086867393', '4086798765', 'credit', NULL, NULL, '5');
 insert into user values ('101', 'michael', 'jordan', 'user2', '8580 main road', 'NY', 'new york', '90055', 'USA', 'user2@gmail.com', '5108756737', '5105984658', 'bill', NULL, NULL, '3.5');
-insert into user values ('102', 'sam', 'smith', 'user3', '4857 9th street', 'AZ', 'scottsdale', '98757', 'USA', 'user3@gmail.com', '6708905478', '6708904678', 'credit', NULL, NULL, '4.2');
+insert into user values ('102', 'sam', 'smith', 'testuser', '4857 9th street', 'AZ', 'scottsdale', '98757', 'USA', 'user3@gmail.com', '6708905478', '6708904678', 'credit', NULL, NULL, '4.2');
 insert into user values ('103', 'larry', 'fitzgerald', 'user4', '2384 bark street', 'WA', 'seattle', '91890', 'USA', 'user4@gmail.com', '5124568322', '5124545662', 'credit', NULL, NULL, '3.9');
 insert into user values ('104', 'carlos', 'hyde', 'user5', '1234 north east way', 'CA', 'san francisco', '95909', 'USA', 'user5@gmail.com', '4086785463', NULL, 'credit', NULL, NULL, '2.5');
         -- '2016-11-22 11:24:00'                                                                                                                                                                                                                
                                                                                                                                                                                                                                                         -- item_id, bid_id
 insert into auction values ('200', 'Active', 'live', '0', '50', '200', '5', NULL, '1', '2016-11-27 03:00:00', '1', NULL, '5', '1', '3');
 insert into auction values ('201', 'Active', 'live', '0', '1000', '8000', '500', NULL, '500', '2016-11-27 09:00:00', '1', NULL, '1', '2', '2');
+insert into auction values ('202', 'Active', 'live', '0', '350', '600', '415', NULL, '1', '2016-11-27 12:00:00', '5', NULL, '2', '3', '1');
+insert into auction values ('203', 'Active', 'live', '0', '400', '700', '250', NULL, '1', '2016-11-27 13:00:00', '1', NULL, '1', '4', '4');
 
-                                        --   item_id, model, condition,name, rating, sku, count, image, manufacturer, description, retail_price, state, country, type_id)
+					--   item_id, model, condition,name, rating, sku, count, image, manufacturer, description, retail_price, state, country, type_id)
 insert into item values ('1', 'm10456', 'new', 'camera', '4.2', 'pas67857', '1', NULL, 'sony', 'High-definition, brand new', '65', 'CA', 'USA', '304');
 insert into item values ('2', 'a158361', 'used', 'dirt bike', '3', 'h586876', '1', NULL, 'honda', 'slightly used, new wheels', '3500', 'CA', 'USA', '303');
 insert into item values ('3', 'x3384', 'used', 'xbox one', '4', NULL, '1', NULL, 'microsoft', '500GB, comes with two controllers', '300', 'CA', 'USA', '309');
+insert into item values ('4', 'x3663', 'new', 'xbox two', '5', NULL, '1', NULL, 'microsoft', '1TB, comes with three controllers', '350', 'CA', 'USA', '310');
 
                                         -- typeid, typename
 insert into type values ('300', 'food');
@@ -133,7 +136,10 @@ insert into bid values ('5', '$', '2016-11-22 22:33:00', '2016-11-22 23:00:00', 
 insert into bidder values ('100', '2');
 
                                                 -- user_id, auction_id
-insert into auctioneer values ('102', '2');
+insert into auctioneer values ('102', '200');
+insert into auctioneer values ('102', '201');
+insert into auctioneer values ('102', '202');
+insert into auctioneer values ('102', '203');
 
                                                         -- employer_id, employee_id, commission
 insert into employed_by values ('104', '100', '10');
@@ -153,5 +159,3 @@ SET foreign_key_checks = 1;
 -- select * From bid;
 -- select * From user;
 
-
-select acc_create, last_login FROM user WHERE firstname = 'john' OR lastname = 'smith';
