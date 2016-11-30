@@ -7,4 +7,6 @@ To get running:
 4) Clone repository and navigave to it
 5) Run 'npm install' to download dependencides
 6) Run 'node index.js' to begin server
-7) Website visible at: http://localhost:8080
+7) Run MySQL local MySQL server and execute model query
+8) Change "Password" in Line 15 of index.js to password used in your server
+9) Website visible at: http://localhost:8080
