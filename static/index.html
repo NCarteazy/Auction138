@@ -18,7 +18,11 @@
     <title>Auction 138</title>
   </head>
   <body bgcolor=white ng-controller="auctionCtrl">
+  <div class="container">
+    <div class="center-block" style="border-style:solid">
+      <h1 class="text-center">Auction 138</h1>
 
+<<<<<<< HEAD
     <h1>Auction 138</h1>
 
   <div class="center-block">
@@ -72,18 +76,49 @@
         <label class="col-sm-2 control-label">{{attr.text}}</label>
         <input type="text" required ng-model="attr.val" name="attr.name">
         <br>
+=======
+      <div id="auctions" ng-init="loadauction()">
+        <table align="center" style="width:100%" class="table table-striped">
+          <tr>
+            <th class="text-center col-sm-2">Item Name</th>
+            <th class="text-center col-sm-1">Current Price</th>
+            <th class="text-center col-sm-2">Buyout Price</th>
+            <th class="text-center col-sm-2">End Time</th>
+            <th class="text-center col-sm-1">Condition</th>
+            <th class="text-center col-sm-2">Bid Amount</th>
+            <th class="text-center col-sm-2"></th> <!-- leave blank, col for bid button -->
+          </tr>
+          <tr ng-repeat="auc in auctions">
+            <td class="text-center col-sm-2">{{auc.item_name}}</td>
+            <td class="text-center col-sm-1">${{auc.current_price}}</td>
+            <td class="text-center col-sm-2">${{auc.buyout_price}}</td>
+            <td class="text-center col-sm-2">{{auc.end_time}}</td>
+            <td class="text-center col-sm-1">{{auc.item_condition}}</td>
+            <td class="col-sm-2"><div align="middle"><input style="width:50%"  ng-model="auc.curbid" type="number"></div></td>
+            <td class="col-sm-2"><button class="btn btn-default" ng-click="placebid(auc)">Place Bid</button></td>
+          </tr>
+        </table>
+>>>>>>> parent of 6923532... Revert "Much cleaner front page"
       </div>
 
+      <br>
+      <div id="users">
+        <form name="userInput" class="form"> 
+        <!-- change to form-inline and tune to have two columns if time allows-->
+          <div class="form-group" ng-repeat="attr in user.list">
+            <label class="col-sm-2 control-label">{{attr.text}}</label>
+            <div class="col-sm-2">
+              <input type="text" required ng-model="attr.val" name="attr.name">
+            </div>
+            <br>
+          </div>
+        </form>
 
-    </form>
+        <p>{{createduser}}</p>
+        <p ng-show="success.create">butts</p>
+        <button class="btn btn-default" ng-click="testcreate()">Test button</button>
 
-
-      <p>{{answers}}</p>
-    <button class="btn btn-default" ng-click="testcreate()">Test button</button>
-    <div ng-repeat="pers in answers">
-        <p>{{ pers.firstname }}</p>
-        <p>{{ pers.lastname }}</p>
-        <p>{{ pers.st_add }}</p>
+      </div>
     </div>
   </div>
   </body>
