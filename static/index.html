@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Allerta' rel='stylesheet' type='text/css'>
+
     
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -26,32 +30,33 @@
     <h1>Auction 138</h1>
 
   <div class="center-block">
-  <div>
-    <h3>Enter a username to search for their active auctions (testuser is a good sample).</h3>
-    <input type="text" ng-model="userauc.uname">
-    <button ng-click="userauction()">Search</button>
-    <table style="width:100%" class="table table-striped" ng-show="userauc.show">
-        <tr>
-          <th>Auction ID</th>
-          <th>Status</th>
-          <th>Current Price</th>
-          <th>Buyout Price</th>
-          <th>End Time</th>
-          <th>Number of Bids</th>
-        </tr>
-        <tr ng-repeat="auc in userauc.results">
-          <td>{{auc.auction_id}}</td>
-          <td>{{auc.status}}</td>
-          <td>${{auc.current_price}}</td>
-          <td>${{auc.buyout_price}}</td>
-          <td>{{auc.end_time}}</td>
-          <td>{{auc.num_of_bids}}</td>
-        </tr>
-      </table>
-  </div>
-<br>
+  
+    <div id="">
+      <h3>Enter a username to search for their active auctions (testuser is a good sample).</h3>
+      <input type="text" ng-model="userauc.uname">
+      <button ng-click="userauction()">Search</button>
+      <table style="width:100%" class="table table-hover" ng-show="userauc.show">
+          <tr>
+            <th>Auction ID</th>
+            <th>Status</th>
+            <th>Current Price</th>
+            <th>Buyout Price</th>
+            <th>End Time</th>
+            <th>Number of Bids</th>
+          </tr>
+          <tr ng-repeat="auc in userauc.results">
+            <td>{{auc.auction_id}}</td>
+            <td>{{auc.status}}</td>
+            <td>${{auc.current_price}}</td>
+            <td>${{auc.buyout_price}}</td>
+            <td>{{auc.end_time}}</td>
+            <td>{{auc.num_of_bids}}</td>
+          </tr>
+        </table>
+    </div>
+    <br>
     <div ng-init="loadauction()">
-      <table style="width:100%" class="table table-striped">
+      <table style="width:100%" class="table table-hover">
         <tr>
           <th>Item Name</th>
           <th>Current Price</th>

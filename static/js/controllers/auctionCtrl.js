@@ -145,7 +145,7 @@ angular.module('auctionApp', [])
 				url: '/auctions',
 				}).then(function successCallback(response) {
 					//successfully got a response
-					console.log("res:" + response);
+					console.log("res:" + response.data.start_time);
 					$scope.auctions = response.data;
 					$scope.status = "idle";
 				}, function errorCallback(response) {
