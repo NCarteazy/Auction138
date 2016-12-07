@@ -105,7 +105,7 @@ CREATE TABLE placed_on          (bidref_id INTEGER,
 
 
 
-insert into user values ('100', 'john', 'smith', 'user1', '5467 first street', 'CA', 'san jose', '95122', 'USA', 'user1@gmail.com', '4086867393', '4086798765', AES_ENCRYPT('123456789012', 'key'), NULL, NULL, '5');
+insert into user values ('100', 'john', 'smith', 'user1', '5467 first street', 'CA', 'san jose', '95122', 'USA', 'user1@gmail.com', '4086867393', '4086798765', AES_ENCRYPT('123456789012', 'jayz'), NULL, NULL, '5');
 insert into user values ('101', 'michael', 'jordan', 'user2', '8580 main road', 'NY', 'new york', '90055', 'USA', 'user2@gmail.com', '5108756737', '5105984658', AES_ENCRYPT('00004782971', 'jayz'), NULL, NULL, '3.5');
 insert into user values ('102', 'sam', 'smith', 'testuser', '4857 9th street', 'AZ', 'scottsdale', '98757', 'USA', 'user3@gmail.com', '6708905478', '6708904678', AES_ENCRYPT('2947194001649', 'jayz'), NULL, NULL, '4.2');
 insert into user values ('103', 'larry', 'fitzgerald', 'user4', '2384 bark street', 'WA', 'seattle', '91890', 'USA', 'user4@gmail.com', '5124568322', '5124545662', AES_ENCRYPT('03856847263', 'jayz'), NULL, NULL, '3.9');
