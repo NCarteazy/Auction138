@@ -15,7 +15,7 @@ module.exports = function(app, db) {
 		//create query by escaping values
 		//query creates a new user row
 		var map = [rq.uid,rq.fname,rq.lname,rq.uname,rq.st_add,rq.state,rq.city,rq.zipcode,rq.country,rq.email,rq.mobilenum,rq.homenum,rq.payment];
-		var query = "insert into user values (?,?,?,?,?,?,?,?,?,?,?,?,?,NULL,NULL,NULL);";
+		var query = "insert into user values (?,?,?,?,?,?,?,?,?,?,?,?,AES_ENCRYPT(?, 'jayz'),NULL,NULL,NULL);";
 		console.log("About to run query:" + query);
 
 		db.query(query, map, function(err, results) {
